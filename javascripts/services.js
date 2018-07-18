@@ -1,4 +1,4 @@
-angular.module('myapp')
+angular.module('seil-bms-angularjs')
 
 .service('Auth',['$http','$location',function($http, $location){
 

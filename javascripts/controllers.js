@@ -1,5 +1,5 @@
 var API_ROOT = "/api/"
-angular.module('myapp')
+angular.module('seil-bms-angularjs')
 
 .controller('HomeCtrl', function($scope,$http, Auth, $window, $location) {
     Auth.loginRequired();
@@ -9,8 +9,19 @@ angular.module('myapp')
     }
 })
 .controller('205Ctrl', function($scope, $http, Auth, $window, $location){
-	Auth.loginRequired();
+	// Auth.loginRequired();
 	$scope.changeState = function(appliance, state){
+		var state_string = state? "on" : "off";
+		$http.get(API_ROOT+"control/205/"+appliance+"/"+state_string);
+	}
+    $scope.logout = function(){
+        $window.localStorage.removeItem('satellizer_token');
+        $location.path('/');
+    }
+})
+.controller('ExplorerCtrl', function($scope, $http, Auth, $window, $location){
+	// Auth.loginRequired();
+	$scope.toggle = function(appliance, state){
 		var state_string = state? "on" : "off";
 		$http.get(API_ROOT+"control/205/"+appliance+"/"+state_string);
 	}

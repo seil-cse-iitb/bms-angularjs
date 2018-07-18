@@ -1,0 +1,52 @@
+<div ng-include="'templates/toolbar.html'"></div>
+
+<section layout flex="100" layout-align="space-around">
+    <md-switch ng-model="switch.light" ng-change="changeState('lights',switch.light)" aria-label="Switch Light">
+        All Lights
+    </md-switch>
+    <md-switch ng-model="switch.fan" ng-change="changeState('fans',switch.fan)" aria-label="Switch Fan">
+        All Fans
+    </md-switch>
+    <!-- <md-switch ng-model="switch.ac" ng-change="changeState('ACs',switch.ac)" aria-label="Switch AC">
+        All ACs
+    </md-switch> -->
+
+</section>
+
+<section layout layout-align="space-around">
+    <table flex="60">
+        <tr>
+            <td colspan=2>
+                <light></light>
+            </td>
+            <td colspan=2>
+                <light></light>
+            </td>
+            <td colspan=2>
+                <light></light>
+            </td>
+        </tr>
+        <tr>
+            <td colspan=2>
+                <fan></fan>
+            </td>
+            <td colspan=2>
+                <fan></fan>
+            </td>
+            <td colspan=2>
+                <fan></fan>
+            </td>
+        </tr>
+        <tr>
+            <td colspan=2>
+                <light></light>
+            </td>
+            <td colspan=2>
+                <light></light>
+            </td>
+            <td colspan=2>
+                <light></light>
+            </td>
+        </tr>
+    </table>
+</section>

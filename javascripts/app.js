@@ -1,8 +1,8 @@
-angular.module('myapp', ['ngMaterial','ngRoute','ngResource','angular-jwt','satellizer'])
+angular.module('seil-bms-angularjs', ['ngMaterial','ngRoute','ngResource','angular-jwt','satellizer'])
 
 .config(function($mdThemingProvider) {
   $mdThemingProvider.theme('default')
-    .primaryPalette('teal')
+    .primaryPalette('green')
     .accentPalette('blue')
     .dark();
 })

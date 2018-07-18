@@ -7,6 +7,7 @@ a {
   color: #00B7FF;
 }
 
+
 .light.on #rect4136{
 	fill:#fff;
 }
@@ -14,11 +15,15 @@ a {
     from {transform: rotate(0deg);}
     to {transform: rotate(360deg);}
 }
-.fan.on #fan{
-	transform-origin: 50% 62.5%;
+fan .on #fan{
+	transform-origin: 74% 105%;
 	transform: translate(69.191433px,-109.11923px);
 	animation: rotate 1s linear infinite;
 }
-.light.on #tube1, .light.on #tube2 {
+light .on #tube1, .light.on #tube2 {
 	fill:#ffffff !important;
+}
+fan > md-card, light > md-card {
+  max-width:200px;
+  max-height:550px;
 }

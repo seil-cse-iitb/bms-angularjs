@@ -1,4 +1,4 @@
-angular.module('myapp')
+angular.module('seil-bms-angularjs')
 .config(function($routeProvider) {
     $routeProvider
     .when("/", {
@@ -8,6 +8,10 @@ angular.module('myapp')
     .when("/205", {
         templateUrl : "templates/205.html",
         controller : "205Ctrl"
+    })
+    .when("/explorer", {
+        templateUrl : "templates/explorer.html",
+        controller : "ExplorerCtrl"
     })
     .when("/login", {
         templateUrl : "templates/login.html",
