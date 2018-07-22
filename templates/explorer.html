@@ -1,6 +1,25 @@
 <div ng-include="'templates/toolbar.html'"></div>
-
-<section layout flex="100" layout-align="space-around">
+<section layout flex="80" flex-offset="10" layout-align="start start" layout-wrap>
+    <md-subheader flex="100">Sub-locations</md-subheader>
+    <md-card ng-repeat="child in properties.children" ng-click="navigate(child.path)">
+        <md-card-header>
+            <md-card-header-text>
+                <span class="md-title">{{child.name}}</span>
+            </md-card-header-text>
+        </md-card-header>
+        <!-- <div ng-include="'images/fan.svg'" layout class="light" ng-class="{'on':switch.fan}"></div>
+        <md-card-actions layout="column" layout-align="start">
+            <md-switch ng-model="switch.fan" aria-label="Switch 1" >
+                OFF / ON
+            </md-switch>
+            <md-slider flex class="md-warn" md-discrete ng-model="regulator" step="1" min="1" max="5" aria-label="rating">
+                Regulator
+            </md-slider>
+        </md-card-actions> -->
+    </md-card>
+</section>
+<section layout flex="80" flex-offset="10" layout-align="space-around" layout-wrap>
+    <md-subheader flex="100">Location-wide controls</md-subheader>
     <md-switch ng-model="switch.light" ng-change="changeState('lights',switch.light)" aria-label="Switch Light">
         All Lights
     </md-switch>
@@ -13,40 +32,49 @@
 
 </section>
 
-<section layout layout-align="space-around">
-    <table flex="60">
-        <tr>
-            <td colspan=2>
-                <light></light>
-            </td>
-            <td colspan=2>
-                <light></light>
-            </td>
-            <td colspan=2>
-                <light></light>
-            </td>
-        </tr>
-        <tr>
-            <td colspan=2>
-                <fan></fan>
-            </td>
-            <td colspan=2>
-                <fan></fan>
-            </td>
-            <td colspan=2>
-                <fan></fan>
-            </td>
-        </tr>
-        <tr>
-            <td colspan=2>
-                <light></light>
-            </td>
-            <td colspan=2>
-                <light></light>
-            </td>
-            <td colspan=2>
-                <light></light>
+<section layout layout-align="space-around" flex="80" flex-offset="10" layout-wrap>
+    <md-subheader flex="100">Controls</md-subheader>
+    <table flex="80">
+        <tr ng-repeat="row in table">
+            <td ng-repeat="item in row  track by $index" colspan="{{item.properties.colspan}}" rowspan="{{item.properties.rowspan}}">
+                <light ng-if="item.type=='light'"></light>
+                <fan ng-if="item.type=='fan'"></fan>
             </td>
         </tr>
     </table>
+    <!-- <table flex="80">
+        <tr>
+            <td colspan=2>
+                <light></light>
+            </td>
+            <td colspan=2>
+                <light></light>
+            </td>
+            <td colspan=2>
+                <light></light>
+            </td>
+        </tr>
+        <tr>
+            <td colspan=2>
+                <fan></fan>
+            </td>
+            <td colspan=2>
+                <fan></fan>
+            </td>
+            <td colspan=2>
+                <fan></fan>
+            </td>
+        </tr>
+        <tr>
+            <td colspan=2>
+                <light></light>
+            </td>
+            <td colspan=2>
+                <light></light>
+            </td>
+            <td colspan=2>
+                <light></light>
+            </td>
+        </tr>
+    </table> -->
 </section>

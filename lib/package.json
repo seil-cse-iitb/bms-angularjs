@@ -9,6 +9,7 @@
   "author": "Shinjan Mitra",
   "license": "ISC",
   "dependencies": {
+    "@uirouter/angularjs": "^1.0.19",
     "angular": "1.5.5",
     "angular-animate": "1.5.5",
     "angular-aria": "1.5.5",

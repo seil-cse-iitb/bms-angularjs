@@ -1,4 +1,4 @@
-angular.module('seil-bms-angularjs', ['ngMaterial','ngRoute','ngResource','angular-jwt','satellizer'])
+angular.module('seil-bms-angularjs', ['ngMaterial','ui.router','ngResource','angular-jwt','satellizer'])
 
 .config(function($mdThemingProvider) {
   $mdThemingProvider.theme('default')
@@ -15,7 +15,8 @@ angular.module('seil-bms-angularjs', ['ngMaterial','ngRoute','ngResource','angul
 	    }
 
 	    return localStorage.getItem('satellizer_token');
-	  }]
+    }],
+    whiteListedDomains: ['http://localhost:1337']
 	});
 
 	$httpProvider.interceptors.push('jwtInterceptor');
