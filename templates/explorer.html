@@ -37,8 +37,8 @@
     <table flex="80">
         <tr ng-repeat="row in table">
             <td ng-repeat="item in row  track by $index" colspan="{{item.properties.colspan}}" rowspan="{{item.properties.rowspan}}">
-                <light ng-if="item.type=='light'"></light>
-                <fan ng-if="item.type=='fan'"></fan>
+                <light ng-if="item.type=='light'" light="item"></light>
+                <fan ng-if="item.type=='fan'" fan="item"></fan>
             </td>
         </tr>
     </table>

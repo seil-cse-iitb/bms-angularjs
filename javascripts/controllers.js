@@ -27,7 +27,6 @@ angular.module('seil-bms-angularjs')
         $location.path('/');
     }
     $http.get(API_ROOT+'location?path='+$stateParams.path).then(function(res){
-        console.log(res.data)
         $scope.properties = res.data;
         $scope.table = Array.matrix($scope.properties.rows,$scope.properties.cols,0);
         Equipment.query({location:$stateParams.path},function(res){
@@ -35,7 +34,6 @@ angular.module('seil-bms-angularjs')
                 var equipment = res[i];
                 $scope.table[equipment.properties.row-1][equipment.properties.col-1] = equipment;
             };
-            console.log($scope.table)
         })
     })
     $scope.navigate = function(path){
