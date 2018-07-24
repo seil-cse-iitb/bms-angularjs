@@ -1,4 +1,4 @@
-var API_ROOT = "http://localhost:1337/"
+var API_ROOT = CONFIG.BACKEND_HOST
 angular.module('seil-bms-angularjs')
 
 .controller('HomeCtrl', function($scope,$http, Auth, $window, $location) {
@@ -19,25 +19,32 @@ angular.module('seil-bms-angularjs')
         $location.path('/');
     }
 })
-.controller('ExplorerCtrl', function($scope, $http, $window, $stateParams, $state, Auth, Equipment){
+.controller('ExplorerCtrl', function($scope, $http, $window, $stateParams, $state, $sce, Auth, Equipment){
 	// Auth.loginRequired();
 
     $scope.logout = function(){
         $window.localStorage.removeItem('satellizer_token');
         $location.path('/');
     }
-    $http.get(API_ROOT+'location?path='+$stateParams.path).then(function(res){
-        $scope.properties = res.data;
+    if(!$stateParams.location){
+        $state.go('explorer',{location:'/'});
+    }
+    $http.get(API_ROOT+'location?location='+$stateParams.location).then(function(res){
+        $scope.properties = res.data;        
+        for (const key in $scope.properties.embeds) {
+            $scope.properties.embeds[key] = $sce.trustAsHtml($scope.properties.embeds[key]);
+            
+        }
         $scope.table = Array.matrix($scope.properties.rows,$scope.properties.cols,0);
-        Equipment.query({location:$stateParams.path},function(res){
+        Equipment.query({location:$stateParams.location},function(res){
             for(var i=0;i<res.length;i++){
                 var equipment = res[i];
                 $scope.table[equipment.properties.row-1][equipment.properties.col-1] = equipment;
             };
         })
     })
-    $scope.navigate = function(path){
-        $state.go('explorer',{path:$stateParams.path+path});
+    $scope.navigate = function(location){
+        $state.go('explorer',{location:$stateParams.location+location});
     }
 })
 .controller('LoginCtrl',['$scope','$window','$http','$location','$auth',function($scope,$window,$http,$location,$auth){

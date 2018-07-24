@@ -1,3 +1,5 @@
+CONFIG.BACKEND_HOST =  "http://"+ CONFIG.BACKEND_DOMAIN+":1337/"
+
 angular.module('seil-bms-angularjs', ['ngMaterial','ui.router','ngResource','angular-jwt','satellizer'])
 
 .config(function($mdThemingProvider) {
@@ -16,7 +18,7 @@ angular.module('seil-bms-angularjs', ['ngMaterial','ui.router','ngResource','ang
 
 	    return localStorage.getItem('satellizer_token');
     }],
-    whiteListedDomains: ['http://localhost:1337']
+    whiteListedDomains: [CONFIG.BACKEND_DOMAIN]
 	});
 
 	$httpProvider.interceptors.push('jwtInterceptor');

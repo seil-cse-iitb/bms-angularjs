@@ -18,12 +18,18 @@ a {
 fan .on #fan{
 	transform-origin: 74% 105%;
 	transform: translate(69.191433px,-109.11923px);
-	animation: rotate 1s linear infinite;
+	animation: rotate 0.6s linear infinite;
 }
-light .on #tube1, .light.on #tube2 {
+light .on #tube1, light.on #tube2 {
 	fill:#ffffff !important;
 }
+ac .on #indicator{
+  fill: rgb(76,175,80) !important;
+}
 fan > md-card, light > md-card {
-  max-width:200px;
+  /* max-width:200px; */
   max-height:550px;
+}
+.vertical{
+  transform: rotate(90deg);
 }

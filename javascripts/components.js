@@ -3,7 +3,7 @@ angular.module('seil-bms-angularjs')
     templateUrl: 'components/fan.html',
     controller: function($scope, $element, $attrs){
         var ctrl = this;
-        ctrl.fan.state=false;
+        ctrl.fan.properties.state=false;
     },
     bindings: {
         fan: '<'
@@ -13,9 +13,19 @@ angular.module('seil-bms-angularjs')
     templateUrl: 'components/light.html',
     controller: function($scope, $element, $attrs){
         var ctrl = this;
-        ctrl.light.state=false;
+        ctrl.light.properties.state=false;
     },
     bindings: {
         light: '<'
+    }
+})
+.component('ac', {
+    templateUrl: 'components/ac.html',
+    controller: function($scope, $element, $attrs){
+        var ctrl = this;
+        ctrl.ac.properties.state=false;
+    },
+    bindings: {
+        ac: '<'
     }
 })

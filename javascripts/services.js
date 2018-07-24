@@ -1,4 +1,4 @@
-var API_ROOT = "http://localhost:1337/"
+var API_ROOT = CONFIG.BACKEND_HOST
 
 angular.module('seil-bms-angularjs')
 

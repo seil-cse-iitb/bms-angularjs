@@ -33,7 +33,7 @@ var homeState = {
 
 var explorerState = {
     name: 'explorer',
-    url: '/explorer?path',
+    url: '/explorer?location',
     templateUrl: 'templates/explorer.html',
     controller: 'ExplorerCtrl'
 }
