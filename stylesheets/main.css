@@ -6,30 +6,32 @@ body {
 a {
   color: #00B7FF;
 }
-
-
-.light.on #rect4136{
-	fill:#fff;
+.vertical{
+  transform: rotate(90deg);
 }
 @keyframes rotate {
     from {transform: rotate(0deg);}
     to {transform: rotate(360deg);}
 }
 fan .on #fan{
-	transform-origin: 74% 105%;
-	transform: translate(69.191433px,-109.11923px);
-	animation: rotate 0.6s linear infinite;
+  transform-origin: 50% 60%;
+  transform: translate(0, -27.4112);
+	animation: rotate 1s linear infinite ;
 }
-light .on #tube1, light.on #tube2 {
+light .on #tube1, light .on #tube2, light-array .on #tube1, light-array .on #tube2 {
 	fill:#ffffff !important;
-}
-ac .on #indicator{
-  fill: rgb(76,175,80) !important;
 }
 fan > md-card, light > md-card {
   /* max-width:200px; */
   max-height:550px;
 }
-.vertical{
-  transform: rotate(90deg);
+ac .on #indicator{
+  fill: rgb(76,175,80) !important;
+}
+temperature .md-fab.sensor{
+  position: absolute;
+  color:black;
+}
+.controls-table td{
+  position: relative;
 }

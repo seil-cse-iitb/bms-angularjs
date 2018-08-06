@@ -18,13 +18,15 @@
         </md-card-actions> -->
     </md-card>
 </section>
-<section layout flex="80" flex-offset="10" layout-align="space-around" layout-wrap>
+
+<!-- EMBEDS -->
+<!-- <section layout flex="80" flex-offset="10" layout-align="start" layout-align-gt-xs="space-around" layout-wrap>
     <md-subheader flex="100">Sensor plots</md-subheader>
     <div ng-repeat="embed in properties.embeds" flex="100">
         <div flex="100" ng-bind-html="embed"></div>
     </div>
-</section>
-<section layout flex="80" flex-offset="10" layout-align="space-around" layout-wrap>
+</section> -->
+<section layout flex="80" flex-offset="10" layout-align="start" layout-align-gt-xs="space-around" layout-wrap>
     <md-subheader flex="100">Location-wide controls</md-subheader>
     <!-- <md-switch ng-model="switch.light" ng-change="changeState('lights',switch.light)" aria-label="Switch Light">
         All Lights
@@ -37,14 +39,16 @@
     </span>
 </section>
 
-<section layout layout-align="space-around" flex="80" flex-offset="10" layout-wrap>
+<section layout layout-align="start" layout-align-gt-xs="space-around" flex="80" flex-offset="10" layout-wrap>
     <md-subheader flex="100">Equipment Controls</md-subheader>
-    <table flex="80">
+    <table flex="80" class="controls-table">
         <tr ng-repeat="row in table">
-            <td ng-repeat="item in row  track by $index" colspan="{{item.properties.colspan}}" rowspan="{{item.properties.rowspan}}">
-                <light ng-if="item.type=='light'" light="item"></light>
-                <fan ng-if="item.type=='fan'" fan="item"></fan>
-                <ac ng-if="item.type=='ac'" ac="item"></ac>
+            <td ng-repeat="item in row  track by $index" colspan="{{item.equipment.properties.colspan}}" rowspan="{{item.equipment.properties.rowspan}}">
+                <light ng-if="item.equipment.type=='light'" light="item.equipment"></light>
+                <light-array ng-if="item.equipment.type=='light_array'" light-array="item.equipment"></light-array>
+                <fan ng-if="item.equipment.type=='fan'" fan="item.equipment"></fan>
+                <ac ng-if="item.equipment.type=='ac'" ac="item.equipment"></ac>
+                <temperature ng-if="item.sensor.type=='temperature'" temperature="item.sensor"></temperature>
             </td>
         </tr>
     </table>

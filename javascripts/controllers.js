@@ -19,7 +19,7 @@ angular.module('seil-bms-angularjs')
         $location.path('/');
     }
 })
-.controller('ExplorerCtrl', function($scope, $http, $window, $stateParams, $state, $sce, Auth, Equipment){
+.controller('ExplorerCtrl', function($scope, $http, $window, $stateParams, $state, $sce, Auth, Equipment, Sensor, Util){
 	// Auth.loginRequired();
 
     $scope.logout = function(){
@@ -37,15 +37,38 @@ angular.module('seil-bms-angularjs')
         }
         $scope.table = Array.matrix($scope.properties.rows,$scope.properties.cols,0);
         Equipment.query({location:$stateParams.location},function(res){
-            for(var i=0;i<res.length;i++){
-                var equipment = res[i];
-                $scope.table[equipment.properties.row-1][equipment.properties.col-1] = equipment;
+            $scope.equipments=res;
+            for(var i=0;i<$scope.equipments.length;i++){
+                var equipment = $scope.equipments[i];
+                $scope.table[equipment.properties.row-1][equipment.properties.col-1] = {"equipment":$scope.equipments[i]}
             };
+            // test
+            Sensor.query({location:$stateParams.location},function(res){
+                $scope.sensors = res;
+                for(var i=0;i<$scope.sensors.length;i++){
+                    var sensor = $scope.sensors[i];
+                    $scope.table[sensor.properties.row-1][sensor.properties.col-1].sensor = $scope.sensors[i];
+                };
+                console.log($scope.table)
+            })
         })
+        
     })
     $scope.navigate = function(location){
         $state.go('explorer',{location:$stateParams.location+location});
     }
+    io.socket.get('/sensor/subscribe?location='+$stateParams.location, function(data, jwr) {
+
+        io.socket.on('sensor_data', function(reading) {
+          var sensor = Util.getBySerial($scope.sensors, reading.serial)
+          if(sensor != null){
+            sensor.value = reading.temperature;
+            var hue = 250-(reading.temperature-16)*(250/16) 
+            sensor.properties.style['background-color'] = "hsl("+ hue +",100%,50%)"
+            $scope.$apply();
+          }
+        });
+      });
 })
 .controller('LoginCtrl',['$scope','$window','$http','$location','$auth',function($scope,$window,$http,$location,$auth){
     $scope.login=function(){

@@ -12,6 +12,15 @@ angular.module('seil-bms-angularjs')
     })
   }
 }])
+.service('Util',['$http', '$location', function($http, $location){
+  this.getBySerial = function(list, serial){
+    for(var i=0; i<list.length; i++){
+      if(list[i].serial == serial)
+        return list[i];
+    }
+    return null;
+  };
+}])
 .factory('Sensor', function($resource) {
   return $resource(API_ROOT+'sensor/:sensorId', { sensorId:'@id' });
 })

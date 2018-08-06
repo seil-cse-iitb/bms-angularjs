@@ -38,6 +38,13 @@ var explorerState = {
     controller: 'ExplorerCtrl'
 }
 
+var loginState = {
+    name: 'login',
+    url: '/login',
+    templateUrl: 'templates/login.html',
+    controller: 'LoginCtrl'
+}
 $stateProvider.state(homeState);
 $stateProvider.state(explorerState);
+$stateProvider.state(loginState);
 });
