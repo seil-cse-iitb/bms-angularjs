@@ -8,6 +8,24 @@ angular.module('seil-bms-angularjs')
         $location.path('/login');
     }
 })
+.controller('MasterCtrl', function($scope,$http, Auth, $window, $location, Alert) {
+    // Auth.loginRequired();
+    $scope.logout = function(){
+        $window.localStorage.removeItem('satellizer_token');
+        $location.path('/login');
+    }
+    Alert.query(function(res){
+        $scope.alerts=res;
+    })
+    $scope.generateColorFromLevel = function(level){
+        switch(level){
+            case 'danger': return 'red';
+            case 'warn': return 'amber';
+            case 'info': return 'blue';
+            case 'success': return 'green';
+        }
+    }
+})
 .controller('205Ctrl', function($scope, $http, Auth, $window, $location){
 	// Auth.loginRequired();
 	$scope.changeState = function(appliance, state){

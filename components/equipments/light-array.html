@@ -9,7 +9,7 @@
     <span ng-repeat="i in range($ctrl.lightArray.properties.multiplicity)" ng-include="'images/tube_light.svg'" layout layout-align="center start" flex="30" class="light" ng-class="{'on':$ctrl.lightArray.properties.state}" class="{{$ctrl.lightArray.properties.orientation}}"></span>
     </div>
     <md-card-actions layout="column" layout-align="start">
-        <md-switch ng-model="$ctrl.lightArray.properties.state" aria-label="Switch">
+        <md-switch ng-model="$ctrl.lightArray.properties.state" aria-label="Switch" ng-click="switch($ctrl.lightArray)">
             OFF / ON
         </md-switch>
     </md-card-actions>

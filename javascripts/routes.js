@@ -23,7 +23,7 @@ angular.module('seil-bms-angularjs')
 // });
 
 
-.config(function($stateProvider) {
+.config(function($stateProvider, $urlRouterProvider) {
 var homeState = {
     name: 'home',
     url: '/',
@@ -47,4 +47,6 @@ var loginState = {
 $stateProvider.state(homeState);
 $stateProvider.state(explorerState);
 $stateProvider.state(loginState);
+$urlRouterProvider.otherwise('/explorer');
+
 });

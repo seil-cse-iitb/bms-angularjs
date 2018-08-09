@@ -1,90 +1,63 @@
-<div ng-include="'templates/toolbar.html'"></div>
-<section layout flex="80" flex-offset="10" layout-align="start start" layout-wrap ng-if="properties.children && properties.children.length>0">
-    <md-subheader flex="100">Sub-locations</md-subheader>
-    <md-card ng-repeat="child in properties.children" ng-click="navigate(child.location)">
-        <md-card-header>
-            <md-card-header-text>
-                <span class="md-title">{{child.name}}</span>
-            </md-card-header-text>
-        </md-card-header>
-        <!-- <div ng-include="'images/fan.svg'" layout class="light" ng-class="{'on':switch.fan}"></div>
-        <md-card-actions layout="column" layout-align="start">
-            <md-switch ng-model="switch.fan" aria-label="Switch 1" >
-                OFF / ON
-            </md-switch>
-            <md-slider flex class="md-warn" md-discrete ng-model="regulator" step="1" min="1" max="5" aria-label="rating">
-                Regulator
-            </md-slider>
-        </md-card-actions> -->
-    </md-card>
-</section>
+<section layout="row" flex>
 
-<!-- EMBEDS -->
-<!-- <section layout flex="80" flex-offset="10" layout-align="start" layout-align-gt-xs="space-around" layout-wrap>
-    <md-subheader flex="100">Sensor plots</md-subheader>
-    <div ng-repeat="embed in properties.embeds" flex="100">
-        <div flex="100" ng-bind-html="embed"></div>
-    </div>
-</section> -->
-<section layout flex="80" flex-offset="10" layout-align="start" layout-align-gt-xs="space-around" layout-wrap>
-    <md-subheader flex="100">Location-wide controls</md-subheader>
-    <!-- <md-switch ng-model="switch.light" ng-change="changeState('lights',switch.light)" aria-label="Switch Light">
-        All Lights
-    </md-switch>
-    <md-switch ng-model="switch.fan" ng-change="changeState('fans',switch.fan)" aria-label="Switch Fan">
-        All Fans
-    </md-switch> -->
-    <span ng-repeat="action in properties.actions">
-        <md-switch ng-model="action.state">{{action.name}}</md-switch>
-    </span>
-</section>
+    <md-content flex="100">
+        <div ng-include="'templates/toolbar.html'"></div>
 
-<section layout layout-align="start" layout-align-gt-xs="space-around" flex="80" flex-offset="10" layout-wrap>
-    <md-subheader flex="100">Equipment Controls</md-subheader>
-    <table flex="80" class="controls-table">
-        <tr ng-repeat="row in table">
-            <td ng-repeat="item in row  track by $index" colspan="{{item.equipment.properties.colspan}}" rowspan="{{item.equipment.properties.rowspan}}">
-                <light ng-if="item.equipment.type=='light'" light="item.equipment"></light>
-                <light-array ng-if="item.equipment.type=='light_array'" light-array="item.equipment"></light-array>
-                <fan ng-if="item.equipment.type=='fan'" fan="item.equipment"></fan>
-                <ac ng-if="item.equipment.type=='ac'" ac="item.equipment"></ac>
-                <temperature ng-if="item.sensor.type=='temperature'" temperature="item.sensor"></temperature>
-            </td>
-        </tr>
-    </table>
-    <!-- <table flex="80">
-        <tr>
-            <td colspan=2>
-                <light></light>
-            </td>
-            <td colspan=2>
-                <light></light>
-            </td>
-            <td colspan=2>
-                <light></light>
-            </td>
-        </tr>
-        <tr>
-            <td colspan=2>
-                <fan></fan>
-            </td>
-            <td colspan=2>
-                <fan></fan>
-            </td>
-            <td colspan=2>
-                <fan></fan>
-            </td>
-        </tr>
-        <tr>
-            <td colspan=2>
-                <light></light>
-            </td>
-            <td colspan=2>
-                <light></light>
-            </td>
-            <td colspan=2>
-                <light></light>
-            </td>
-        </tr>
-    </table> -->
+        <section layout flex="80" flex-offset="10" layout-align="start start" layout-wrap ng-if="properties.children && properties.children.length>0">
+            <md-subheader flex="100">Locations</md-subheader>
+            <md-card ng-repeat="child in properties.children" ng-click="navigate(child.location)">
+                <md-card-header>
+                    <md-card-header-text>
+                        <span class="md-title">{{child.name}}</span>
+                    </md-card-header-text>
+                </md-card-header>
+            </md-card>
+        </section>
+
+        <!-- GROUP CONTROLS -->
+        <section layout flex="80" flex-offset="10" layout-align="start" layout-align-gt-xs="space-around" layout-wrap ng-if="equipment_groups && equipment_groups.length>0">
+            <md-subheader flex="100">Location-wide controls</md-subheader>
+            <!-- <md-switch ng-model="switch.light" ng-change="changeState('lights',switch.light)" aria-label="Switch Light">
+            All Lights
+        </md-switch>
+        <md-switch ng-model="switch.fan" ng-change="changeState('fans',switch.fan)" aria-label="Switch Fan">
+            All Fans
+        </md-switch> -->
+            <span ng-repeat="action in properties.actions">
+                <md-switch ng-model="action.state">{{action.name}}</md-switch>
+            </span>
+        </section>
+
+        <section layout layout-align="start" layout-align-gt-xs="space-around" flex="80" flex-offset="10" layout-wrap ng-if="table && table.length>0">
+            <md-subheader flex="100">Equipment Controls</md-subheader>
+            <table flex="80" class="controls-table">
+                <tr ng-repeat="row in table">
+                    <td ng-repeat="item in row  track by $index" colspan="{{item.equipment.properties.colspan}}" rowspan="{{item.equipment.properties.rowspan}}">
+                        <light ng-if="item.equipment.type=='light'" light="item.equipment"></light>
+                        <light-array ng-if="item.equipment.type=='light_array'" light-array="item.equipment"></light-array>
+                        <fan ng-if="item.equipment.type=='fan'" fan="item.equipment"></fan>
+                        <ac ng-if="item.equipment.type=='ac'" ac="item.equipment"></ac>
+                        <temperature ng-if="item.sensor.type=='temperature'" temperature="item.sensor"></temperature>
+                    </td>
+                </tr>
+            </table>
+        </section>
+    </md-content>
+
+    <md-sidenav class="md-sidenav-right" md-component-id="right" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4">
+
+        <md-toolbar class="md-theme-light">
+            <h1 class="md-toolbar-tools">Alerts</h1>
+        </md-toolbar>
+        <md-content layout-padding>
+            <md-list flex>
+                <md-list-item class="md-3-line" ng-repeat="alert in alerts" ng-click="null" md-colors="{background: '{{generateColorFromLevel(alert.level)}}'}">
+                    <div class="md-list-item-text" layout="column">
+                        <h3>{{ alert.title }}</h3>
+                        <p>{{ alert.description }}</p>
+                    </div>
+                </md-list-item>
+              </md-list>
+        </md-content>
+    </md-sidenav>
 </section>
