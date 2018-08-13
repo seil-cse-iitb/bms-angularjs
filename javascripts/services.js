@@ -30,8 +30,14 @@ angular.module('seil-bms-angularjs')
     actuate: {method: 'POST', params: {equipmentId: '@id'}, url: API_ROOT+'equipment/actuate/:equipmentId'}
   });
 })
+.factory('EquipmentGroup', function($resource) {
+  return $resource(API_ROOT+'equipmentGroup/:equipmentId', { equipmentId:'@id' },{
+    //actions
+    actuate: {method: 'POST', params: {equipmentId: '@id'}, url: API_ROOT+'equipmentGroup/actuate/:equipmentId'}
+  });
+})
 .factory('Alert', function($resource) {
-  return $resource(API_ROOT+'alert/:alertId', { alertId:'@id' });
+  return $resource(API_ROOT+'alert/:alertId ASC', { alertId:'@id' });
 })
 // .factory('channel', function($resource) {
 //   return $resource('/todo/:todoId', { todoId:'@_id' });

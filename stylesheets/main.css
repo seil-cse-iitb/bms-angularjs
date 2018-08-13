@@ -28,10 +28,35 @@ fan > md-card, light > md-card {
 ac .on #indicator{
   fill: rgb(76,175,80) !important;
 }
-temperature .md-fab.sensor{
+temperature .sensor{
   position: absolute;
   color:black;
 }
+temperature .sensor small{
+  color:white;
+}
 .controls-table td{
   position: relative;
+}
+
+table md-card .md-actions, table md-card md-card-actions{
+  margin:0px;
+  margin-left:8px;
+}
+md-card md-switch{
+  margin:1px;
+}
+.md-button.child{
+  position: absolute;
+  font-size:20px;
+  min-width:100px;
+  min-height:60px;
+  top:50px;
+}
+.indicator{
+  width:50px;
+  height:50px;
+}
+.alert .md-list-item-text p{
+  color:black;
 }
